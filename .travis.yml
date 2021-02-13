@@ -47,5 +47,5 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-common.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-plugins.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
