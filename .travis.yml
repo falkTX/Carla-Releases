@@ -15,7 +15,7 @@ cache:
 
 env:
   global:
-    - BOOTSTRAP_VERSION=1
+    - BOOTSTRAP_VERSION=2
 
 jobs:
   # linux with win32 cross-compilation
@@ -47,5 +47,5 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-plugins.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
