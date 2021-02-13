@@ -49,3 +49,5 @@ install:
 script:
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-plugins.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
