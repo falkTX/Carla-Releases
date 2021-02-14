@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "${TARGET}" = "macos" ]; then
+if [ "${TARGET}" = "macos" ] || [ "${TARGET}" = "macos-universal" ]; then
     exit 0
 fi
 
