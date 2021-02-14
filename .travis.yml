@@ -47,6 +47,6 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
-  - rm -rf ${HOME}/PawPawBuilds/builds/win64/pyliblo-0.9.2
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+  - bash ${TRAVIS_BUILD_DIR}/build.sh ${TARGET}
