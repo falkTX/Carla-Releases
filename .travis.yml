@@ -57,6 +57,16 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
-  - bash ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
   - bash ${TRAVIS_BUILD_DIR}/build.sh ${TARGET}
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "Dw7tHLJLiZRxoaaIEqqgX9DDmp55IlzLljiDy0Q7v+hD0c0o9Nnc4Oh+EV7Q3Ytuh0HSa9rCtxj2G72gPxwYZUysDz8NIGVKLQy4UtedOrnhmadk4xjW5I026+nCmuAPV03y83dDgIo0LoK0QpXrvPxUTB3uEFWnaC/dOCwox9Za/UbeYyvgDKxGbD7glGihYIRo8+g9UsMNEGL+koKXg4UZXz0nCh5G6wBfmigjp2BYxrVq0MCwZOxIWCh/huxtXtYV1k/hgjOGJmCaEedfUoG33EjjnLi69SvtNo/SEdP1MeH+mqRoJ3HKf/2dt1WmL1YylCfnrVpQsXEAZPTpPkKH7U7kSlMslvGyNe1cGgKY/kacOFH6IKjstjAJ+7xcfFl7Paau6hJL/OU0trbBgCl8NFJuG3TJecr1ZlyXa39/5EpMqe1mLkEen9yu1p3PsvwT0PhBFwF8/WvQMH457DxPFOPdXBEXLFYgTKuoGfeWq4Yyu46moerdgICSE/woKAcssn0tS6pnWOhoGqhUPO9KzlQwL5A6ayC3KuRZJq+gTDqoheKcpUce8EKKdxsTKQZhFr0qQBb1eX64QFxSkt46supBHVMmlvwpCajXfml81tb5UqFaSwkMsFElLY9v+HW1SBzK4VE8i+5fZABs/rDTVfmyqYTPOVGhj4+Exvs="
+  file_glob: true
+  file:
+    - Carla/*.dmg
+    - Carla/*.zip
+  skip_cleanup: true
+  #on:
+    #tags: true
