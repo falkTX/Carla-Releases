@@ -16,6 +16,9 @@ fi
 # ---------------------------------------------------------------------------------------------------------------------
 # check if building from scratch
 
+PAWPAW_DIR="${HOME}/PawPawBuilds"
+PAWPAW_BUILDDIR="${PAWPAW_DIR}/builds/${PAWPAW_TARGET}"
+
 if [ -e ${PAWPAW_BUILDDIR}/.last-bootstrap-version ]; then
     LAST_BOOTSTRAP_VERSION=$(cat ${PAWPAW_BUILDDIR}/.last-bootstrap-version)
 else
