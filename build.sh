@@ -23,7 +23,7 @@ popd
 
 pushd Carla
 make features
-make ${MAKE_ARGS}
+make EXTERNAL_PLUGINS=false ${MAKE_ARGS}
 popd
 
 # ---------------------------------------------------------------------------------------------------------------------
