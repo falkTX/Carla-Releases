@@ -68,5 +68,5 @@ deploy:
     - Carla/*.dmg
     - Carla/*.zip
   skip_cleanup: true
-  #on:
-    #tags: true
+  on:
+    tags: true
