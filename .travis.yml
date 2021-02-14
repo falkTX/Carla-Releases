@@ -46,7 +46,7 @@ jobs:
   # macOS universal build
   - name: "macOS universal"
     os: osx
-    osx_image: xcode12u
+    osx_image: xcode12.3
     env:
       - TARGET="macos-universal"
 
