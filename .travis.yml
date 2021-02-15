@@ -19,30 +19,30 @@ env:
     - BOOTSTRAP_VERSION=2
 
 jobs:
-  # linux with win32 cross-compilation
-  - name: "win32 cross-compiled"
-    os: linux
-    compiler: gcc
-    env:
-      - TARGET="win32"
-    services:
-      - xvfb
+  ## linux with win32 cross-compilation
+  #- name: "win32 cross-compiled"
+    #os: linux
+    #compiler: gcc
+    #env:
+      #- TARGET="win32"
+    #services:
+      #- xvfb
 
-  # linux with win64 cross-compilation
-  - name: "win64 cross-compiled"
-    os: linux
-    compiler: gcc
-    env:
-      - TARGET="win64"
-    services:
-      - xvfb
+  ## linux with win64 cross-compilation
+  #- name: "win64 cross-compiled"
+    #os: linux
+    #compiler: gcc
+    #env:
+      #- TARGET="win64"
+    #services:
+      #- xvfb
 
-  # macOS native intel build
-  - name: "macOS native intel"
-    os: osx
-    osx_image: xcode9.4
-    env:
-      - TARGET="macos"
+  ## macOS native intel build
+  #- name: "macOS native intel"
+    #os: osx
+    #osx_image: xcode9.4
+    #env:
+      #- TARGET="macos"
 
   # macOS universal build
   - name: "macOS universal"
