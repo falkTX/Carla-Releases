@@ -44,11 +44,11 @@ jobs:
       - TARGET="macos"
 
   # macOS universal build
-  - name: "macOS universal"
-    os: osx
-    osx_image: xcode12.3
-    env:
-      - TARGET="macos-universal"
+  #- name: "macOS universal"
+    #os: osx
+    #osx_image: xcode12.3
+    #env:
+      #- TARGET="macos-universal"
 
 before_install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/before_install.sh
