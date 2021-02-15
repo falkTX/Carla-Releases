@@ -78,6 +78,9 @@ if [ ${BUILD_VERSION} -eq 2 ]; then
         curl -L "https://falktx.com/data/pawpaw-qt-macos-universal.tar.xz" -o "pawpaw-qt-macos-universal.tar.xz" --fail
         tar xvf pawpaw-qt-macos-universal.tar.xz
         popd
+        ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
+        ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+        exit 0
     fi
     ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
