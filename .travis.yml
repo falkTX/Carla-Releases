@@ -10,6 +10,7 @@ cache:
     - ${HOME}/PawPawBuilds/debs
     - ${HOME}/PawPawBuilds/downloads
     - ${HOME}/PawPawBuilds/targets/macos
+    - ${HOME}/PawPawBuilds/targets/macos-universal
     - ${HOME}/PawPawBuilds/targets/win32
     - ${HOME}/PawPawBuilds/targets/win64
 
@@ -44,11 +45,11 @@ jobs:
       - TARGET="macos"
 
   # macOS universal build
-  #- name: "macOS universal"
-    #os: osx
-    #osx_image: xcode12.3
-    #env:
-      #- TARGET="macos-universal"
+  - name: "macOS universal"
+    os: osx
+    osx_image: xcode12.3
+    env:
+      - TARGET="macos-universal"
 
 before_install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/before_install.sh
@@ -62,7 +63,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: "Dw7tHLJLiZRxoaaIEqqgX9DDmp55IlzLljiDy0Q7v+hD0c0o9Nnc4Oh+EV7Q3Ytuh0HSa9rCtxj2G72gPxwYZUysDz8NIGVKLQy4UtedOrnhmadk4xjW5I026+nCmuAPV03y83dDgIo0LoK0QpXrvPxUTB3uEFWnaC/dOCwox9Za/UbeYyvgDKxGbD7glGihYIRo8+g9UsMNEGL+koKXg4UZXz0nCh5G6wBfmigjp2BYxrVq0MCwZOxIWCh/huxtXtYV1k/hgjOGJmCaEedfUoG33EjjnLi69SvtNo/SEdP1MeH+mqRoJ3HKf/2dt1WmL1YylCfnrVpQsXEAZPTpPkKH7U7kSlMslvGyNe1cGgKY/kacOFH6IKjstjAJ+7xcfFl7Paau6hJL/OU0trbBgCl8NFJuG3TJecr1ZlyXa39/5EpMqe1mLkEen9yu1p3PsvwT0PhBFwF8/WvQMH457DxPFOPdXBEXLFYgTKuoGfeWq4Yyu46moerdgICSE/woKAcssn0tS6pnWOhoGqhUPO9KzlQwL5A6ayC3KuRZJq+gTDqoheKcpUce8EKKdxsTKQZhFr0qQBb1eX64QFxSkt46supBHVMmlvwpCajXfml81tb5UqFaSwkMsFElLY9v+HW1SBzK4VE8i+5fZABs/rDTVfmyqYTPOVGhj4+Exvs="
+    secure: "RXDXPvFeD1Dx6gpbAkNzXJysdIDZANVd/DqGI8U9a1Ul75HyUV3h8pBpoAP180UnSdQaAOzmACSQoIgbdeFptovUuXL3nbEqAXCQcbykcbXAQ1SzO0xmT4WrJ7Uk9Z7T6MadzwYPmna8cCBNL2cT24D4N9rlH/FV+DoY9hpkf9TuE0FLXCXPhLsT+OxIOCblwoaZODuAgYLNaohfEwxow1GXwjKgl71rFkJ1M7iEJGRKpKALIhHeM6iKxbUuUHZcebwH/ga2tbEooL2O9tbDa6OFdHZ9NgzqtGkjeHwDMRVgPqcFPkFiglmi0AWzP/DJgnu36C1D0O81XRKCbjCDia+FH7n/mnA0XImWAx2VTL+JPBN7nzZZL3UscbyosWF3Kc9/7XpIyuV4h19XGQqwonXEZKRhAa2GDCKQQ5zE8cB6WN1YQWVJR66hfWSA2hqHjf2uRY67VP9+tYdlL5ygK70LaQpKQbUBKYKagJcyIbHl/J0tOCiJc5D7pl1i/Hew6Btdk+LuVwLrpmjINJwY9PFn/mIG95R9FnhwGUfVcuCqJgUm0+vnTmGuu7Hr+4QvVPVgfUb61gbLd+651YYoG2ERR91e1QREWZ4lXWwV5sACEPpM6/zU6/leD10qGMZKiYSQegpj2RAcZncZzeIqpn3nyN0aNZ1Hg90JFdOWjrs="
   file_glob: true
   file:
     - Carla/*.dmg

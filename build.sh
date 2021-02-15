@@ -17,7 +17,7 @@ fi
 # check build step
 
 PAWPAW_DIR="${HOME}/PawPawBuilds"
-PAWPAW_BUILDDIR="${PAWPAW_DIR}/builds/${PAWPAW_TARGET}"
+PAWPAW_BUILDDIR="${PAWPAW_DIR}/builds/${TARGET}"
 
 if [ -e ${PAWPAW_BUILDDIR}/.last-bootstrap-version ]; then
     LAST_BOOTSTRAP_VERSION=$(cat ${PAWPAW_BUILDDIR}/.last-bootstrap-version)
@@ -45,6 +45,32 @@ if [ ${BUILD_VERSION} -eq 1 ]; then
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
     exit 0
 elif [ ${BUILD_VERSION} -eq 2 ]; then
+    # qt build takes too long on macos-universal target, download and use premade builds
+    if [ "${TARGET}" = "macos-universal" ]; then
+        MACOS_UNIVERSAL=1
+        source "${TRAVIS_BUILD_DIR}/PawPaw/setup/versions.sh"
+        mkdir "${PAWPAW_BUILDDIR}/qtbase-opensource-src-${QT5_VERSION}"
+        touch "${PAWPAW_BUILDDIR}/qtbase-opensource-src-${QT5_VERSION}/.stamp_configured"
+        touch "${PAWPAW_BUILDDIR}/qtbase-opensource-src-${QT5_VERSION}/.stamp_built"
+        touch "${PAWPAW_BUILDDIR}/qtbase-opensource-src-${QT5_VERSION}/.stamp_installed"
+        touch "${PAWPAW_BUILDDIR}/qtbase-opensource-src-${QT5_VERSION}/.stamp_applied_01_force-10.12-universal-build.patch"
+        mkdir "${PAWPAW_BUILDDIR}/qtmacextras-opensource-src-${QT5_VERSION}"
+        touch "${PAWPAW_BUILDDIR}/qtmacextras-opensource-src-${QT5_VERSION}/.stamp_configured"
+        touch "${PAWPAW_BUILDDIR}/qtmacextras-opensource-src-${QT5_VERSION}/.stamp_built"
+        touch "${PAWPAW_BUILDDIR}/qtmacextras-opensource-src-${QT5_VERSION}/.stamp_installed"
+        mkdir "${PAWPAW_BUILDDIR}/qtsvg-opensource-src-${QT5_VERSION}"
+        touch "${PAWPAW_BUILDDIR}/qtsvg-opensource-src-${QT5_VERSION}/.stamp_configured"
+        touch "${PAWPAW_BUILDDIR}/qtsvg-opensource-src-${QT5_VERSION}/.stamp_built"
+        touch "${PAWPAW_BUILDDIR}/qtsvg-opensource-src-${QT5_VERSION}/.stamp_installed"
+        mkdir "${PAWPAW_BUILDDIR}/qttools-opensource-src-${QT5_VERSION}"
+        touch "${PAWPAW_BUILDDIR}/qttools-opensource-src-${QT5_VERSION}/.stamp_configured"
+        touch "${PAWPAW_BUILDDIR}/qttools-opensource-src-${QT5_VERSION}/.stamp_built"
+        touch "${PAWPAW_BUILDDIR}/qttools-opensource-src-${QT5_VERSION}/.stamp_installed"
+        pushd "${PAWPAW_DIR}/target/${TARGET}"
+        curl -L "https://falktx.com/data/pawpaw-qt-macos-universal.tar.xz" -o "pawpaw-qt-macos-universal.tar.xz" --fail
+        tar xvf pawpaw-qt-macos-universal.tar.xz
+        popd
+    fi
     ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
     exit 0
