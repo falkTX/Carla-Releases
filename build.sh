@@ -74,7 +74,7 @@ if [ ${BUILD_VERSION} -eq 2 ]; then
         touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_configured"
         touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_built"
         touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_installed"
-        pushd "${PAWPAW_DIR}/targets/${TARGET}"
+        pushd "${PAWPAW_DIR}/targets"
         curl -L "https://falktx.com/data/pawpaw-qt-macos-universal.tar.xz" -o "pawpaw-qt-macos-universal.tar.xz" --fail
         tar xvf pawpaw-qt-macos-universal.tar.xz
         popd
