@@ -51,7 +51,11 @@ fi
 if [ ${BUILD_VERSION} -eq 2 ]; then
     # qt build takes too long on macos-universal target, download and use premade builds
     if [ "${TARGET}" = "macos-universal" ]; then
+        CROSS_COMPILING=1
+        MACOS=1
+        MACOS_OLD=0
         MACOS_UNIVERSAL=1
+        WIN32=0
         source "${TRAVIS_BUILD_DIR}/PawPaw/setup/versions.sh"
         mkdir "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}"
         touch "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}/.stamp_configured"
@@ -70,7 +74,7 @@ if [ ${BUILD_VERSION} -eq 2 ]; then
         touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_configured"
         touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_built"
         touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_installed"
-        pushd "${PAWPAW_DIR}/target/${TARGET}"
+        pushd "${PAWPAW_DIR}/targets/${TARGET}"
         curl -L "https://falktx.com/data/pawpaw-qt-macos-universal.tar.xz" -o "pawpaw-qt-macos-universal.tar.xz" --fail
         tar xvf pawpaw-qt-macos-universal.tar.xz
         popd
