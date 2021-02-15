@@ -14,7 +14,7 @@ if [ -z "${target}" ]; then
 fi
 
 # ---------------------------------------------------------------------------------------------------------------------
-# check if building from scratch
+# check build step
 
 PAWPAW_DIR="${HOME}/PawPawBuilds"
 PAWPAW_BUILDDIR="${PAWPAW_DIR}/builds/${PAWPAW_TARGET}"
@@ -25,23 +25,34 @@ else
     LAST_BOOTSTRAP_VERSION=0
 fi
 
+if [ ${LAST_BOOTSTRAP_VERSION} -eq ${BOOTSTRAP_VERSION} ] && [ -e ${PAWPAW_BUILDDIR}/.last-build-version ]; then
+    LAST_BUILD_VERSION=$(cat ${PAWPAW_BUILDDIR}/.last-build-version)
+else
+    LAST_BUILD_VERSION=0
+fi
+
+BUILD_VERSION=$((${LAST_BUILD_VERSION} + 1))
+
 mkdir -p ${PAWPAW_BUILDDIR}
 echo ${BOOTSTRAP_VERSION} > ${PAWPAW_BUILDDIR}/.last-bootstrap-version
+echo ${BUILD_VERSION} > ${PAWPAW_BUILDDIR}/.last-build-version
 
 # ---------------------------------------------------------------------------------------------------------------------
-# stop at qt build if bootstrap environment starts from scratch
+# build dependencies according to version/step, caching files along the way
 
-if [ ${LAST_BOOTSTRAP_VERSION} -ne ${BOOTSTRAP_VERSION} ]; then
+if [ ${BUILD_VERSION} -eq 1 ]; then
+    ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-plugins.sh ${TARGET}
+    ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+    exit 0
+elif [ ${BUILD_VERSION} -eq 2 ]; then
     ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
     exit 0
+elif [ ${BUILD_VERSION} -eq 3 ]; then
+    ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
+    ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+    exit 0
 fi
-
-# ---------------------------------------------------------------------------------------------------------------------
-# build dependencies
-
-${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
-${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # import PawPaw environment
