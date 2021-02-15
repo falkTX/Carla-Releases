@@ -54,6 +54,10 @@ elif [ ${BUILD_VERSION} -eq 3 ]; then
     exit 0
 fi
 
+# always do a bootstrap run, in case libraries have updates to install
+${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
+${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # import PawPaw environment
 
