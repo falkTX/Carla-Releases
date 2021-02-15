@@ -37,6 +37,8 @@ mkdir -p ${PAWPAW_BUILDDIR}
 echo ${BOOTSTRAP_VERSION} > ${PAWPAW_BUILDDIR}/.last-bootstrap-version
 echo ${BUILD_VERSION} > ${PAWPAW_BUILDDIR}/.last-build-version
 
+echo "Carla-Releases build v${BUILD_VERSION}"
+
 # ---------------------------------------------------------------------------------------------------------------------
 # build dependencies according to version/step, caching files along the way
 
@@ -44,7 +46,9 @@ if [ ${BUILD_VERSION} -eq 1 ]; then
     ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-plugins.sh ${TARGET}
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
     exit 0
-elif [ ${BUILD_VERSION} -eq 2 ]; then
+fi
+
+if [ ${BUILD_VERSION} -eq 2 ]; then
     # qt build takes too long on macos-universal target, download and use premade builds
     if [ "${TARGET}" = "macos-universal" ]; then
         MACOS_UNIVERSAL=1
@@ -74,15 +78,14 @@ elif [ ${BUILD_VERSION} -eq 2 ]; then
     ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
     exit 0
-elif [ ${BUILD_VERSION} -eq 3 ]; then
-    ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
-    ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-    exit 0
 fi
 
-# always do a bootstrap run, in case libraries have updates to install
 ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
 ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+
+if [ ${BUILD_VERSION} -eq 3 ]; then
+    exit 0
+fi
 
 # ---------------------------------------------------------------------------------------------------------------------
 # import PawPaw environment
