@@ -91,37 +91,6 @@ if [ ${BUILD_VERSION} -eq 3 ]; then
     exit 0
 fi
 
-# testing
-if [ "${TARGET}" = "macos-universal" ]; then
-    CROSS_COMPILING=0
-    MACOS=1
-    MACOS_OLD=0
-    MACOS_UNIVERSAL=1
-    WIN32=0
-    source "${TRAVIS_BUILD_DIR}/PawPaw/setup/versions.sh"
-    mkdir -p "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}"
-    touch "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}/.stamp_configured"
-    touch "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}/.stamp_built"
-    touch "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}/.stamp_installed"
-    touch "${PAWPAW_BUILDDIR}/qtbase-everywhere-src-${QT5_VERSION}/.stamp_applied_01_force-10.12-universal-build.patch"
-    mkdir -p "${PAWPAW_BUILDDIR}/qtmacextras-everywhere-src-${QT5_VERSION}"
-    touch "${PAWPAW_BUILDDIR}/qtmacextras-everywhere-src-${QT5_VERSION}/.stamp_configured"
-    touch "${PAWPAW_BUILDDIR}/qtmacextras-everywhere-src-${QT5_VERSION}/.stamp_built"
-    touch "${PAWPAW_BUILDDIR}/qtmacextras-everywhere-src-${QT5_VERSION}/.stamp_installed"
-    mkdir -p "${PAWPAW_BUILDDIR}/qtsvg-everywhere-src-${QT5_VERSION}"
-    touch "${PAWPAW_BUILDDIR}/qtsvg-everywhere-src-${QT5_VERSION}/.stamp_configured"
-    touch "${PAWPAW_BUILDDIR}/qtsvg-everywhere-src-${QT5_VERSION}/.stamp_built"
-    touch "${PAWPAW_BUILDDIR}/qtsvg-everywhere-src-${QT5_VERSION}/.stamp_installed"
-    mkdir -p "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}"
-    touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_configured"
-    touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_built"
-    touch "${PAWPAW_BUILDDIR}/qttools-everywhere-src-${QT5_VERSION}/.stamp_installed"
-    pushd "${PAWPAW_DIR}/targets"
-    curl -L "https://falktx.com/data/pawpaw-qt-macos-universal.tar.xz" -o "pawpaw-qt-macos-universal.tar.xz" --fail
-    tar xvf pawpaw-qt-macos-universal.tar.xz
-    popd
-fi
-
 # ---------------------------------------------------------------------------------------------------------------------
 # import PawPaw environment
 
@@ -135,10 +104,12 @@ popd
 pushd Carla
 make features
 make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS}
-if [ "${WIN64}" -eq 1 ]; then
+if [ "${MACOS}" -eq 1 ] && [ "${MACOS_UNIVERSAL}" -eq 0 ]; then
+make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS} posix32
+elif [ "${WIN64}" -eq 1 ]; then
 make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS} win32r
 fi
-make dist
+make dist ${MAKE_ARGS} -j 1
 popd
 
 # ---------------------------------------------------------------------------------------------------------------------
