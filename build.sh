@@ -103,9 +103,9 @@ popd
 
 pushd Carla
 make features
-make EXTERNAL_PLUGINS=false ${MAKE_ARGS}
+make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS}
 if [ "${WIN64}" -eq 1 ]; then
-make EXTERNAL_PLUGINS=false ${MAKE_ARGS} win32r
+make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS} win32r
 fi
 make dist
 popd
