@@ -51,7 +51,7 @@ fi
 if [ ${BUILD_VERSION} -eq 2 ]; then
     # qt build takes too long on macos-universal target, download and use premade builds
     if [ "${TARGET}" = "macos-universal" ]; then
-        CROSS_COMPILING=1
+        CROSS_COMPILING=0
         MACOS=1
         MACOS_OLD=0
         MACOS_UNIVERSAL=1
@@ -78,9 +78,6 @@ if [ ${BUILD_VERSION} -eq 2 ]; then
         curl -L "https://falktx.com/data/pawpaw-qt-macos-universal.tar.xz" -o "pawpaw-qt-macos-universal.tar.xz" --fail
         tar xvf pawpaw-qt-macos-universal.tar.xz
         popd
-        ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
-        ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
-        exit 0
     fi
     ${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-qt.sh ${TARGET}
     ${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
