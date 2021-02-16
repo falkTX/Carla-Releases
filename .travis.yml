@@ -58,7 +58,7 @@ install:
   - bash ${TRAVIS_BUILD_DIR}/.travis/install.sh
 
 script:
-  #- echo 1 > ${HOME}/PawPawBuilds/builds/macos-universal/.last-build-version
+  - echo 1 > ${HOME}/PawPawBuilds/builds/macos-universal/.last-build-version
   - bash ${TRAVIS_BUILD_DIR}/build.sh ${TARGET}
 
 deploy:
