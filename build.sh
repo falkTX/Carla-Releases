@@ -109,6 +109,9 @@ make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS} posix32
 elif [ "${WIN64}" -eq 1 ]; then
 make EXTERNAL_PLUGINS=false NOOPT=true ${MAKE_ARGS} win32r
 fi
+make dist ${MAKE_ARGS} TESTING=true -j 1
+make dist ${MAKE_ARGS} TESTING=true -j 1
+make dist ${MAKE_ARGS} TESTING=true -j 1
 make dist ${MAKE_ARGS} -j 1
 popd
 
