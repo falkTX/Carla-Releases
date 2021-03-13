@@ -36,7 +36,7 @@ BUILD_VERSION=$((${LAST_BUILD_VERSION} + 1))
 mkdir -p ${PAWPAW_BUILDDIR}
 echo ${BOOTSTRAP_VERSION} > ${PAWPAW_BUILDDIR}/.last-bootstrap-version
 
-if [ ${BUILD_VERSION} -lt 4 ]; then
+if [ ${BUILD_VERSION} -le 4 ]; then
     echo ${BUILD_VERSION} > ${PAWPAW_BUILDDIR}/.last-build-version
 fi
 
