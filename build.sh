@@ -63,6 +63,9 @@ if [ ${BUILD_VERSION} -eq 3 ]; then
     exit 0
 fi
 
+${TRAVIS_BUILD_DIR}/PawPaw/bootstrap-carla.sh ${TARGET}
+${TRAVIS_BUILD_DIR}/PawPaw/.cleanup.sh ${TARGET}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # import PawPaw environment
 
