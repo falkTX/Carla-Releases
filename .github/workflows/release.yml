@@ -1,4 +1,4 @@
-name: plugins
+name: release
 
 on:
   push:
@@ -18,6 +18,8 @@ jobs:
     runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Set up cache
       uses: actions/cache@v2
       with:
@@ -36,7 +38,7 @@ jobs:
     - name: Build macOS intel
       shell: bash
       run: |
-        ./build-carla.sh macos ${PLUGINS_BASE} ${PLUGINS_CROSS} ${PLUGINS_DISTRHO_PORTS} && ./.cleanup.sh macos
+        ./build-carla.sh macos
     - uses: actions/upload-artifact@v2
       with:
         name: macOS intel package
@@ -47,6 +49,8 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Set up cache
       uses: actions/cache@v2
       with:
@@ -65,7 +69,7 @@ jobs:
     - name: Build macOS universal
       shell: bash
       run: |
-        ./build-carla.sh macos-universal ${PLUGINS_BASE} ${PLUGINS_CROSS} ${PLUGINS_DISTRHO_PORTS} && ./.cleanup.sh macos-universal
+        ./build-carla.sh macos-universal
     - uses: actions/upload-artifact@v2
       with:
         name: macOS universal package
@@ -76,6 +80,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Set up cache
       uses: actions/cache@v2
       with:
@@ -108,7 +114,7 @@ jobs:
     - name: Build win32 cross-compiled
       shell: bash
       run: |
-        ./build-carla.sh win32 ${PLUGINS_BASE} ${PLUGINS_CROSS} ${PLUGINS_DISTRHO_PORTS} && ./.cleanup.sh win32
+        ./build-carla.sh win32
     - uses: actions/upload-artifact@v2
       with:
         name: win32 installer
@@ -119,6 +125,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Set up cache
       uses: actions/cache@v2
       with:
@@ -152,7 +160,7 @@ jobs:
     - name: Build win64 cross-compiled
       shell: bash
       run: |
-        ./build-carla.sh win64 ${PLUGINS_BASE} ${PLUGINS_CROSS} ${PLUGINS_DISTRHO_PORTS} && ./.cleanup.sh win64
+        ./build-carla.sh win64
     - uses: actions/upload-artifact@v2
       with:
         name: win64 installer
