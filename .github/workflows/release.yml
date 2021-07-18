@@ -34,7 +34,7 @@ jobs:
     - name: Bootstrap macOS intel
       shell: bash
       run: |
-        ./bootstrap-carla.sh macos && ./.cleanup.sh macos
+        ./PawPaw/bootstrap-carla.sh macos && ./PawPaw/.cleanup.sh macos
     - name: Build macOS intel
       shell: bash
       run: |
@@ -65,7 +65,7 @@ jobs:
     - name: Bootstrap macOS universal
       shell: bash
       run: |
-        ./bootstrap-carla.sh macos-universal && ./.cleanup.sh macos-universal
+        ./PawPaw/bootstrap-carla.sh macos-universal && ./PawPaw/.cleanup.sh macos-universal
     - name: Build macOS universal
       shell: bash
       run: |
@@ -110,7 +110,7 @@ jobs:
     - name: Bootstrap win32 cross-compiled
       shell: bash
       run: |
-        ./bootstrap-carla.sh win32 && ./.cleanup.sh win32
+        ./PawPaw/bootstrap-carla.sh win32 && ./PawPaw/.cleanup.sh win32
     - name: Build win32 cross-compiled
       shell: bash
       run: |
@@ -156,7 +156,7 @@ jobs:
     - name: Bootstrap win64 cross-compiled
       shell: bash
       run: |
-        ./bootstrap-carla.sh win64 && ./.cleanup.sh win64
+        ./PawPaw/bootstrap-carla.sh win64 && ./PawPaw/.cleanup.sh win64
     - name: Build win64 cross-compiled
       shell: bash
       run: |
