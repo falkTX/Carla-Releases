@@ -105,6 +105,7 @@ jobs:
         wget -qO- https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add - && \
         sudo dpkg --add-architecture i386 && \
         sudo apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
+        sudo apt-get update -qq && \
         sudo apt-get install -y build-essential curl cmake jq llvm mingw-w64 qttools5-dev-tools winehq-stable \
           binutils-mingw-w64-i686 g++-mingw-w64-i686
     - name: Cache debian packages
