@@ -26,7 +26,7 @@ jobs:
         with:
           path: |
             ~/PawPawBuilds
-        key: macos-v${{ env.CACHE_VERSION }}
+          key: macos-v${{ env.CACHE_VERSION }}
       - name: Set up dependencies
         run: |
           brew install cmake jq meson
