@@ -34,6 +34,8 @@ fi
 make dist ${MAKE_ARGS} TESTING=true -j 1
 make dist ${MAKE_ARGS} TESTING=true -j 1
 make dist ${MAKE_ARGS} TESTING=true -j 1
+make dist ${MAKE_ARGS} TESTING=true -j 1
+make dist ${MAKE_ARGS} TESTING=true -j 1
 make dist ${MAKE_ARGS} -j 1
 popd
 

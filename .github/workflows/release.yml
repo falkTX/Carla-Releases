@@ -34,10 +34,10 @@ jobs:
         shell: bash
         run: |
           ./PawPaw/bootstrap-carla.sh macos && ./PawPaw/.cleanup.sh macos
-      #- name: Build macOS intel
-        #shell: bash
-        #run: |
-          #./build.sh macos
+      - name: Build macOS intel
+        shell: bash
+        run: |
+          ./build.sh macos
       #- uses: actions/upload-artifact@v2
         #with:
           #name: macOS intel package
@@ -67,10 +67,10 @@ jobs:
         shell: bash
         run: |
           ./PawPaw/bootstrap-carla.sh macos-universal && ./PawPaw/.cleanup.sh macos-universal
-      #- name: Build macOS universal
-        #shell: bash
-        #run: |
-          #./build.sh macos-universal
+      - name: Build macOS universal
+        shell: bash
+        run: |
+          ./build.sh macos-universal
       #- uses: actions/upload-artifact@v2
         #with:
           #name: macOS universal package
@@ -113,14 +113,14 @@ jobs:
         shell: bash
         run: |
           ./PawPaw/bootstrap-carla.sh win32 && ./PawPaw/.cleanup.sh win32
-      #- name: Build win32 cross-compiled
-        #shell: bash
-        #run: |
-          #./build.sh win32
-      #- uses: actions/upload-artifact@v2
-        #with:
-          #name: win32 installer
-          #path: Carla/*.zip
+      - name: Build win32 cross-compiled
+        shell: bash
+        run: |
+          ./build.sh win32
+      - uses: actions/upload-artifact@v2
+        with:
+          name: win32 installer
+          path: Carla/*.zip
 
   # linux with win64 cross-compilation
   win64:
@@ -159,11 +159,11 @@ jobs:
         shell: bash
         run: |
           ./PawPaw/bootstrap-carla.sh win64 && ./PawPaw/.cleanup.sh win64
-      #- name: Build win64 cross-compiled
-        #shell: bash
-        #run: |
-          #./build.sh win64
-      #- uses: actions/upload-artifact@v2
-        #with:
-          #name: win64 installer
-          #path: Carla/*.zip
+      - name: Build win64 cross-compiled
+        shell: bash
+        run: |
+          ./build.sh win64
+      - uses: actions/upload-artifact@v2
+        with:
+          name: win64 installer
+          path: Carla/*.zip
