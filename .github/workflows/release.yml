@@ -2,11 +2,7 @@ name: release
 
 on:
   push:
-    branches:
-      - '*'
-  pull_request:
-    branches:
-      - '*'
+
 env:
   CACHE_VERSION: 4
   DEBIAN_FRONTEND: noninteractive
@@ -75,6 +71,15 @@ jobs:
         with:
           name: macOS universal package
           path: Carla/*.dmg
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            path: Carla/*.dmg
 
   # linux with win32 cross-compilation
   win32:
@@ -121,6 +126,15 @@ jobs:
         with:
           name: win32 installer
           path: Carla/*.zip
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            path: Carla/*.zip
 
   # linux with win64 cross-compilation
   win64:
@@ -167,3 +181,12 @@ jobs:
         with:
           name: win64 installer
           path: Carla/*.zip
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            path: Carla/*.zip
