@@ -29,7 +29,7 @@ if [ "${MACOS}" -eq 1 ] && [ "${MACOS_UNIVERSAL}" -eq 0 ]; then
     EXTRA_ARGS="HAVE_HYLIA=0 HAVE_QT5PKG=true"
     export MOC_QT5=moc
     export RCC_QT5=rcc
-endif
+fi
 
 pushd Carla
 make features
