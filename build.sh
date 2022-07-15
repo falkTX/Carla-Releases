@@ -16,8 +16,6 @@ fi
 # ---------------------------------------------------------------------------------------------------------------------
 # import PawPaw environment
 
-export PAWPAW_SKIP_LTO=1
-
 pushd PawPaw
 source local.env ${target}
 popd
