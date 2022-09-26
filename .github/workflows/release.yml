@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  CACHE_VERSION: 8
+  CACHE_VERSION: 9
   DEBIAN_FRONTEND: noninteractive
   HOMEBREW_NO_AUTO_UPDATE: 1
 
@@ -82,7 +82,7 @@ jobs:
 
   # linux with win32 cross-compilation
   win32:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -102,14 +102,14 @@ jobs:
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
           sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libgd3/focal libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
-          sudo apt-get purge -yqq libmono* moby* mono* php* libgdiplus libpcre2-posix3 libzip4
+          sudo apt-get install -yqq --allow-downgrades libgd3/jammy
+          sudo apt-get purge -yqq libmono* moby* mono* msbuild* php* libgdiplus libpcre2-posix3 nuget
       - name: Set up dependencies
         run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update -qq
           sudo apt-get install -y build-essential curl cmake jq meson mingw-w64 qttools5-dev qttools5-dev-tools xvfb \
-            binutils-mingw-w64-i686 g++-mingw-w64-i686 mingw-w64 wine-stable:i386
+            binutils-mingw-w64-i686 g++-mingw-w64-i686 mingw-w64 wine-stable
       - name: Cache debian packages
         run: |
           mkdir -p ~/PawPawBuilds/debs
@@ -138,7 +138,7 @@ jobs:
 
   # linux with win64 cross-compilation
   win64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -158,8 +158,8 @@ jobs:
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
           sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libgd3/focal libpcre2-8-0/focal libpcre2-16-0/focal libpcre2-32-0/focal libpcre2-posix2/focal
-          sudo apt-get purge -yqq libmono* moby* mono* php* libgdiplus libpcre2-posix3 libzip4
+          sudo apt-get install -yqq --allow-downgrades libgd3/jammy
+          sudo apt-get purge -yqq libmono* moby* mono* msbuild* php* libgdiplus libpcre2-posix3 nuget
       - name: Set up dependencies
         run: |
           sudo dpkg --add-architecture i386
