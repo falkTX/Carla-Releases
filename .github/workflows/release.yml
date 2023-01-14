@@ -13,11 +13,11 @@ jobs:
   #macos:
     #runs-on: macos-10.15
     #steps:
-      #- uses: actions/checkout@v2
+      #- uses: actions/checkout@v3
         #with:
           #submodules: recursive
       #- name: Set up cache
-        #uses: actions/cache@v2
+        #uses: actions/cache@v3
         #with:
           #path: |
             #~/PawPawBuilds
@@ -33,7 +33,7 @@ jobs:
         #shell: bash
         #run: |
           #./build.sh macos
-      #- uses: actions/upload-artifact@v2
+      #- uses: actions/upload-artifact@v3
         #with:
           #name: macOS intel package
           #path: Carla/*.dmg
@@ -42,11 +42,11 @@ jobs:
   macos_universal:
     runs-on: macos-10.15
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Set up cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/PawPawBuilds
@@ -66,7 +66,7 @@ jobs:
         shell: bash
         run: |
           ./build.sh macos-universal
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: macOS universal package
           path: Carla/*.dmg
@@ -84,11 +84,11 @@ jobs:
   win32:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Set up cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/PawPawBuilds
@@ -122,7 +122,7 @@ jobs:
         shell: bash
         run: |
           ./build.sh win32
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: win32 installer
           path: Carla/*.zip
@@ -140,11 +140,11 @@ jobs:
   win64:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Set up cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/PawPawBuilds
@@ -178,7 +178,7 @@ jobs:
         shell: bash
         run: |
           ./build.sh win64
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: win64 installer
           path: Carla/*.zip
