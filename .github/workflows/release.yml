@@ -2,45 +2,21 @@ name: release
 
 on:
   push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
 
 env:
-  CACHE_VERSION: 10
+  CACHE_VERSION: 11
   DEBIAN_FRONTEND: noninteractive
   HOMEBREW_NO_AUTO_UPDATE: 1
 
 jobs:
-  # macOS native intel build
-  #macos:
-    #runs-on: macos-10.15
-    #steps:
-      #- uses: actions/checkout@v3
-        #with:
-          #submodules: recursive
-      #- name: Set up cache
-        #uses: actions/cache@v3
-        #with:
-          #path: |
-            #~/PawPawBuilds
-          #key: macos-v${{ env.CACHE_VERSION }}
-      #- name: Set up dependencies
-        #run: |
-          #brew install cmake jq meson
-      #- name: Bootstrap macOS intel
-        #shell: bash
-        #run: |
-          #./PawPaw/bootstrap-carla.sh macos && ./PawPaw/.cleanup.sh macos
-      #- name: Build macOS intel
-        #shell: bash
-        #run: |
-          #./build.sh macos
-      #- uses: actions/upload-artifact@v3
-        #with:
-          #name: macOS intel package
-          #path: Carla/*.dmg
-
   # macOS native universal build
   macos_universal:
-    runs-on: macos-10.15
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v3
         with:
@@ -54,10 +30,6 @@ jobs:
       - name: Set up dependencies
         run: |
           brew install cmake jq meson
-      - name: Fix up Xcode
-        run: |
-          sudo rm -Rf /Library/Developer/CommandLineTools/SDKs/*
-          sudo xcode-select -s "/Applications/Xcode_12.3.app"
       - name: Bootstrap macOS universal
         shell: bash
         run: |
@@ -101,13 +73,11 @@ jobs:
       - name: Fix GitHub's mess
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
-          sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libgd3/jammy
-          sudo apt-get purge -yqq libmono* moby* mono* msbuild* php* libgdiplus libpcre2-posix3 nuget
-      - name: Set up dependencies
-        run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update -qq
+          sudo apt-get install -yqq --allow-downgrades libc6:i386 libgcc-s1:i386 libstdc++6:i386
+      - name: Set up dependencies
+        run: |
           sudo apt-get install -y build-essential curl cmake jq meson mingw-w64 gperf qttools5-dev qttools5-dev-tools xvfb \
             binutils-mingw-w64-i686 g++-mingw-w64-i686 mingw-w64 wine-stable
       - name: Cache debian packages
@@ -157,13 +127,11 @@ jobs:
       - name: Fix GitHub's mess
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
-          sudo apt-get update -qq
-          sudo apt-get install -yqq --allow-downgrades libgd3/jammy
-          sudo apt-get purge -yqq libmono* moby* mono* msbuild* php* libgdiplus libpcre2-posix3 nuget
-      - name: Set up dependencies
-        run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update -qq
+          sudo apt-get install -yqq --allow-downgrades libc6:i386 libgcc-s1:i386 libstdc++6:i386
+      - name: Set up dependencies
+        run: |
           sudo apt-get install -y build-essential curl cmake jq meson mingw-w64 gperf qttools5-dev qttools5-dev-tools xvfb \
             binutils-mingw-w64-x86-64 g++-mingw-w64-x86-64 mingw-w64 wine-stable
       - name: Cache debian packages
